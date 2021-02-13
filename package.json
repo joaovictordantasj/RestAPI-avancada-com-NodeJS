@@ -1,0 +1,27 @@
+{
+  "name": "RestAPI-avancada-com-NodeJS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaovictordantasj/RestAPI-avancada-com-NodeJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaovictordantasj/RestAPI-avancada-com-NodeJS/issues"
+  },
+  "homepage": "https://github.com/joaovictordantasj/RestAPI-avancada-com-NodeJS#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "config": "^3.3.3",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.0"
+  }
+}
