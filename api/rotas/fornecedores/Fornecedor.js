@@ -23,7 +23,7 @@ class Fornecedor {
     this.versao = res.versao;
   }
 
-  async carregar () {
+  async carregar() {
     const encontrado = await TabelaFornecedor.pegarPorId(this.id);
     this.empresa = encontrado.empresa; 
     this.email = encontrado.email; 
@@ -50,6 +50,10 @@ class Fornecedor {
     }
 
     await TabelaFornecedor.atualizar(this.id, dadosParaAtualizar);
+  }
+
+  remover() {
+    return TabelaFornecedor.remover (this.id);
   }
 }
 
