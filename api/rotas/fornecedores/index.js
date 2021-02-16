@@ -20,6 +20,7 @@ roteador.post('/', async (req, res) => {
       JSON.stringify(fornecedor)
     );
   } catch (err) {
+    res.status(400);
     res.send(JSON.stringify({ Erro : err.message}));
   }
 });
@@ -32,6 +33,7 @@ roteador.get('/:idFornecedor', async (req, res) => {
     res.status(200);
     res.send(JSON.stringify(fornecedor));
   } catch (err) {
+    res.status(404);
     res.send(JSON.stringify({ Erro : err.message }));
   }
 });
@@ -46,6 +48,7 @@ roteador.put('/:idFornecedor', async (req, res) => {
     res.status(204);
     res.end();
   } catch (err) {
+    res.status(400);
     res.send(
       JSON.stringify({ Erro : err.message})
     );
@@ -61,6 +64,7 @@ roteador.delete('/:idFornecedor', async (req, res) => {
     res.status(204);
     res.end();
   } catch (err) {
+    res.status(404);
     res.send(
       JSON.stringify({ Erro : err.message})
     )
