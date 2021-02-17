@@ -1,13 +1,13 @@
 const roteador = require('express').Router();
 const TabelaFornecedor = require('./TabelaFornecedor');
 const Fornecedor = require('./Fornecedor');
+const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor;
 
 roteador.get('/', async (req, res) => {
   const resultados = await TabelaFornecedor.listar();
-  res.status(200);
-  res.send(
-    JSON.stringify(resultados)
-  );
+  res.status(200); 
+  const serializador = new SerializadorFornecedor(res.getHeader('Content-Type'));
+  res.send(serializador.serializar(resultados));
 });
 
 roteador.post('/', async (req, res, proximo) => {
@@ -16,9 +16,8 @@ roteador.post('/', async (req, res, proximo) => {
     const fornecedor = new Fornecedor(dadosRecebidos);
     await fornecedor.criar();
     res.status(201);
-    res.send(
-      JSON.stringify(fornecedor)
-    );
+    const serializador = new SerializadorFornecedor(res.getHeader('Content-Type'));
+    res.send(serializador.serializar(fornecedor));
   } catch (err) {
     proximo(err);
   }
@@ -30,7 +29,8 @@ roteador.get('/:idFornecedor', async (req, res, proximo) => {
     const fornecedor = new Fornecedor({ id: id });
     await fornecedor.carregar();
     res.status(200);
-    res.send(JSON.stringify(fornecedor));
+    const serializador = new SerializadorFornecedor(res.getHeader('Content-Type'));
+    res.send(serializador.serializar(fornecedor));
   } catch (err) {
     proximo(err);  
   }
