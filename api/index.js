@@ -7,6 +7,7 @@ const CampoInvalido = require('./erros/CampoInvalido');
 const DadosNaoFornecidos = require('./erros/DadosNaoFornecidos');
 const ValorNaoSuportado = require('./erros/ValorNaoSuportado');
 const formatosAceitos = require('./Serializador').formatosAceitos;
+const SerializadorErro = require('./Serializador').SerializadorErro;
 
 app.use(bodyParser.json());
 
@@ -46,13 +47,16 @@ app.use((err, req, res, proximo) => {
     status = 406;
   }
 
-
+  const serializador = new SerializadorErro(
+    res.getHeader('Content-Type')
+  );
+  
   res.status(status);
-
+  
   res.send(
-    JSON.stringify({
-      Erro : err.message,
-      Id : err.idErro
+    serializador.serializar({
+      mensagem : err.message,
+      id : err.idErro
     })
   );
 });
